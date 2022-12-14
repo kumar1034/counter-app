@@ -17,5 +17,10 @@ pipeline {
                 sh 'mvn verify -DskipUnitTests'
             }
         }
+        stage('Maven Build Artifact'){
+            steps {
+                sh 'mvn clean install'
+            }
+        }
     }
 }
