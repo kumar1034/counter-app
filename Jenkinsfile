@@ -45,6 +45,8 @@ pipeline {
                 script{  
 
                     def read_pom_version = readMavenPom file: 'pom.xml'
+
+                    def nexus-repo = read_pom_version.version.endWith("SNAPSHOT") ? "counterapp-snapshot" : "counterapp-release"
                     nexusArtifactUploader artifacts: 
                     [
                             [
