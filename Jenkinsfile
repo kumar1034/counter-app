@@ -46,7 +46,7 @@ pipeline {
 
                     def read_pom_version = readMavenPom file: 'pom.xml'
 
-                    def nexus_repo = read_pom_version.version.endWith("SNAPSHOT") ? "counterapp-snapshot" : "counterapp-release"
+                    def nexus_repo = read_pom_version.version.endsWith("SNAPSHOT") ? "counterapp-snapshot" : "counterapp-release"
                     nexusArtifactUploader artifacts: 
                     [
                             [
@@ -61,8 +61,8 @@ pipeline {
                     nexusUrl: '3.137.172.102:8081/', 
                     nexusVersion: 'nexus3', 
                     protocol: 'http', 
-                    repository: 'nexus_repo', 
-                    version: "${read_pom_version}"
+                    repository: nexus_repo, 
+                    version: "${read_pom_version.version}"
                     }
                    }
                     
